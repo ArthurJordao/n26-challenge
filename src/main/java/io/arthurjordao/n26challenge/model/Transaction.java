@@ -20,7 +20,7 @@ final public class Transaction {
 
     public boolean isValidTransaction() {
         final LocalDateTime sixtyMinutesAgo = LocalDateTime.now().minusMinutes(1);
-        return timestamp.isAfter(sixtyMinutesAgo);
+        return timestamp.isAfter(sixtyMinutesAgo) && timestamp.isBefore(LocalDateTime.now());
     }
 
     @Override
