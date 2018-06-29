@@ -49,8 +49,8 @@ final public class Statics {
                 amounts.stream().reduce(BigDecimal.ZERO,
                         (current, acc) -> current.compareTo(acc) > 0 ? current : acc);
         final BigDecimal minimum =
-                amounts.stream().reduce(BigDecimal.ZERO,
-                        (current, acc) -> current.compareTo(acc) < 0 ? current : acc);
+                amounts.stream().reduce((current, acc) ->
+                        current.compareTo(acc) < 0 ? current : acc).orElse(BigDecimal.ZERO);
         final int count = validTransactions.size();
         final BigDecimal average;
         if (count != 0) {
