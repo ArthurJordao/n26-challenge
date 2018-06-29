@@ -46,8 +46,8 @@ final public class Statics {
         final BigDecimal sum =
                 amounts.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
         final BigDecimal maximum =
-                amounts.stream().reduce(BigDecimal.ZERO,
-                        (current, acc) -> current.compareTo(acc) > 0 ? current : acc);
+                amounts.stream().reduce((current, acc) ->
+                        current.compareTo(acc) > 0 ? current : acc).orElse(BigDecimal.ZERO);
         final BigDecimal minimum =
                 amounts.stream().reduce((current, acc) ->
                         current.compareTo(acc) < 0 ? current : acc).orElse(BigDecimal.ZERO);
