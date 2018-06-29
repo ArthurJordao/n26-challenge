@@ -2,7 +2,7 @@ package io.arthurjordao.n26challenge.model;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 final public class Statics {
     final private BigDecimal sum;
@@ -41,20 +41,24 @@ final public class Statics {
     }
 
     public static Statics from(List<Transaction> validTransactions) {
-        final Stream<BigDecimal> amounts =
-                validTransactions.stream().map(Transaction::getAmount);
+        final List<BigDecimal> amounts =
+                validTransactions.stream().map(Transaction::getAmount).collect(Collectors.toList());
         final BigDecimal sum =
-                amounts.reduce(BigDecimal.ZERO, BigDecimal::add);
+                amounts.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
         final BigDecimal maximum =
-                amounts.reduce(BigDecimal.ZERO,
+                amounts.stream().reduce(BigDecimal.ZERO,
                         (current, acc) -> current.compareTo(acc) > 0 ? current : acc);
         final BigDecimal minimum =
-                amounts.reduce(BigDecimal.ZERO,
+                amounts.stream().reduce(BigDecimal.ZERO,
                         (current, acc) -> current.compareTo(acc) < 0 ? current : acc);
         final int count = validTransactions.size();
-
-        final BigDecimal average = sum
-                .divide(BigDecimal.valueOf(count),BigDecimal.ROUND_HALF_UP);
+        final BigDecimal average;
+        if (count != 0) {
+             average = sum
+                    .divide(BigDecimal.valueOf(count), BigDecimal.ROUND_HALF_UP);
+        } else {
+            average = BigDecimal.ZERO;
+        }
 
         return new Statics(sum, average, maximum, minimum, count);
     }
