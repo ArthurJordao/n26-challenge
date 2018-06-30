@@ -19,8 +19,6 @@ public class TransactionRepository {
         this.database = database;
     }
 
-    public TransactionRepository() {  }
-
     public void save(Transaction transaction) {
         database.save(transaction);
     }

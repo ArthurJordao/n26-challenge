@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 public class TransactionService {
     private TransactionRepository repository;
 
-    public TransactionService() {  }
-
     @Autowired
     public TransactionService(TransactionRepository repository) {
         this.repository = repository;
