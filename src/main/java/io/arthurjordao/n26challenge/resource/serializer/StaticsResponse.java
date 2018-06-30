@@ -1,6 +1,6 @@
 package io.arthurjordao.n26challenge.resource.serializer;
 
-import io.arthurjordao.n26challenge.model.Statics;
+import io.arthurjordao.n26challenge.model.Statistics;
 
 import java.math.BigDecimal;
 
@@ -62,8 +62,8 @@ public class StaticsResponse {
         this.count = count;
     }
 
-    public static StaticsResponse from(Statics statics) {
-        return new StaticsResponse(statics.getSum(), statics.getAverage(), statics.getMaximum(),
-                statics.getMinimum(), statics.getCount());
+    public static StaticsResponse from(Statistics statistics) {
+        return new StaticsResponse(statistics.getSum(), statistics.getAverage(), statistics.getMaximum(),
+                statistics.getMinimum(), statistics.getCount());
     }
 }
