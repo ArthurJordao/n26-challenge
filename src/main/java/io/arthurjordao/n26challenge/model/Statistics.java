@@ -4,15 +4,15 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
-final public class Statics {
+final public class Statistics {
     final private BigDecimal sum;
     final private BigDecimal average;
     final private BigDecimal maximum;
     final private BigDecimal minimum;
     final private int count;
 
-    public Statics(BigDecimal sum, BigDecimal average, BigDecimal maximum,
-                   BigDecimal minimum, int count) {
+    public Statistics(BigDecimal sum, BigDecimal average, BigDecimal maximum,
+                      BigDecimal minimum, int count) {
         this.sum = sum;
         this.average = average;
         this.maximum = maximum;
@@ -40,9 +40,9 @@ final public class Statics {
         return count;
     }
 
-    public static Statics from(List<Transaction> validTransactions) {
+    public static Statistics from(List<Transaction> transactions) {
         final List<BigDecimal> amounts =
-                validTransactions.stream().map(Transaction::getAmount).collect(Collectors.toList());
+                transactions.stream().map(Transaction::getAmount).collect(Collectors.toList());
         final BigDecimal sum =
                 amounts.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
         final BigDecimal maximum =
@@ -51,7 +51,7 @@ final public class Statics {
         final BigDecimal minimum =
                 amounts.stream().reduce((current, acc) ->
                         current.compareTo(acc) < 0 ? current : acc).orElse(BigDecimal.ZERO);
-        final int count = validTransactions.size();
+        final int count = transactions.size();
         final BigDecimal average;
         if (count != 0) {
              average = sum
@@ -60,6 +60,6 @@ final public class Statics {
             average = BigDecimal.ZERO;
         }
 
-        return new Statics(sum, average, maximum, minimum, count);
+        return new Statistics(sum, average, maximum, minimum, count);
     }
 }

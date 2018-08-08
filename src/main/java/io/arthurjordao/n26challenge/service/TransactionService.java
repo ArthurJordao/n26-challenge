@@ -1,6 +1,6 @@
 package io.arthurjordao.n26challenge.service;
 
-import io.arthurjordao.n26challenge.model.Statics;
+import io.arthurjordao.n26challenge.model.Statistics;
 import io.arthurjordao.n26challenge.model.Transaction;
 import io.arthurjordao.n26challenge.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class TransactionService {
     private TransactionRepository repository;
-
-    public TransactionService() {  }
 
     @Autowired
     public TransactionService(TransactionRepository repository) {
@@ -26,7 +24,7 @@ public class TransactionService {
         }
     }
 
-    public Statics getStatics() {
-        return Statics.from(repository.getValidTransactions());
+    public Statistics getStatics() {
+        return Statistics.from(repository.getValidTransactions());
     }
 }

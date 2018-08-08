@@ -1,6 +1,6 @@
 package io.arthurjordao.n26challenge.resource;
 
-import io.arthurjordao.n26challenge.model.Statics;
+import io.arthurjordao.n26challenge.model.Statistics;
 import io.arthurjordao.n26challenge.model.Transaction;
 import io.arthurjordao.n26challenge.resource.serializer.StaticsResponse;
 import io.arthurjordao.n26challenge.resource.serializer.TransactionRequest;
@@ -35,7 +35,7 @@ public class TransactionResource {
     @GetMapping
     @RequestMapping("/statistics")
     public ResponseEntity<StaticsResponse> statistics() {
-        Statics statics = service.getStatics();
-        return new ResponseEntity<>(StaticsResponse.from(statics), HttpStatus.OK);
+        Statistics statistics = service.getStatics();
+        return new ResponseEntity<>(StaticsResponse.from(statistics), HttpStatus.OK);
     }
 }
